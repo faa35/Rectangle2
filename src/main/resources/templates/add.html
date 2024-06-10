@@ -25,6 +25,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -65,23 +66,26 @@
             margin-bottom: 5px;
         }
         input[type="text"],
-        input[type="number"]
-        {
+        input[type="number"]{
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
         }
-        input[type="color"] 
-        {
 
+        input[type="color"] {
             padding: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
+        }
+        .subtitle {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 10px;
         }
         .button-container {
             display: flex;
@@ -116,29 +120,6 @@
             margin: 20px auto;
         }
     </style>
-    <script>
-        function validateForm() {
-            var name = document.forms["rectangleForm"]["name"].value;
-            if (name == "") {
-                alert("You must name your Rectangle for adding it to the list");
-                return false;
-            }
-            return true;
-        }
-
-        function updatePreview() {
-            var name = document.forms["rectangleForm"]["name"].value;
-            var width = document.forms["rectangleForm"]["width"].value;
-            var height = document.forms["rectangleForm"]["height"].value;
-            var color = document.forms["rectangleForm"]["color"].value;
-
-            var previewRectangle = document.getElementById("previewRectangle");
-            previewRectangle.style.width = width + "px";
-            previewRectangle.style.height = height + "px";
-            previewRectangle.style.backgroundColor = color;
-            previewRectangle.textContent = name;
-        }
-    </script>
 </head>
 <body>
 <div class="container">
@@ -149,8 +130,10 @@
                 <label>Name:</label>
                 <input type="text" th:field="*{name}" oninput="updatePreview()" /><br/>
                 <label>Width:</label>
+                <div class="subtitle">Width must be between 50 and 700</div>
                 <input type="number" th:field="*{width}" oninput="updatePreview()" /><br/>
                 <label>Height:</label>
+                <div class="subtitle">Height must be between 50 and 700</div>
                 <input type="number" th:field="*{height}" oninput="updatePreview()" /><br/>
                 <label>Color:</label>
                 <input type="color" th:field="*{color}" oninput="updatePreview()" /><br/>
@@ -168,7 +151,40 @@
         </div>
     </div>
 </div>
+<script>
+    function validateForm() {
+        var name = document.forms["rectangleForm"]["name"].value;
+        var width = document.forms["rectangleForm"]["width"].value;
+        var height = document.forms["rectangleForm"]["height"].value;
+
+        if (name == "") {
+            alert("You must name your Rectangle for adding it to the list");
+            return false;
+        }
+        if (width < 50 || width > 700) {
+            alert("Width must be more than 50 but less than 700");
+            return false;
+        }
+        if (height < 50 || height > 700) {
+            alert("Height must be more than 50 but less than 700");
+            return false;
+        }
+        return true;
+    }
+
+    function updatePreview() {
+        var name = document.forms["rectangleForm"]["name"].value;
+        var width = document.forms["rectangleForm"]["width"].value;
+        var height = document.forms["rectangleForm"]["height"].value;
+        var color = document.forms["rectangleForm"]["color"].value;
+
+        var previewRectangle = document.getElementById("previewRectangle");
+        previewRectangle.style.width = width + "px";
+        previewRectangle.style.height = height + "px";
+        previewRectangle.style.backgroundColor = color;
+        previewRectangle.textContent = name;
+    }
+</script>
 </body>
 </html>
 
- 
