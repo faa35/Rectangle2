@@ -78,6 +78,12 @@
         .button:hover {
             background-color: #45a049;
         }
+        footer {
+            text-align: center;
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -108,5 +114,11 @@
     <a th:href="@{|/edit/${rectangle.id}|}" class="button">Edit</a>
     <a th:href="@{|/delete/${rectangle.id}|}" class="button">Delete</a>
 </div>
+<footer>
+    <div >
+        Created by Fardin Abdulla<br>
+        &copy; 2024
+    </div>
+</footer>
 </body>
 </html>
